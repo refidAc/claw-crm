@@ -8,7 +8,7 @@ COPY apps/api/ apps/api/
 
 RUN pnpm install --frozen-lockfile
 RUN pnpm --filter @crm/db prisma:generate
-RUN pnpm --filter @crm/api build
+RUN pnpm --filter @crm/api build && ls -la apps/api/dist/ || (echo "ERROR: nest build did not produce dist/" && exit 1)
 
 ENV NODE_ENV=production
 EXPOSE 3000
