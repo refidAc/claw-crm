@@ -1,4 +1,4 @@
-FROM node:20-alpine AS base
+FROM node:20-alpine
 RUN npm install -g pnpm turbo
 
 WORKDIR /app
@@ -10,15 +10,7 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm --filter @crm/db prisma:generate
 RUN pnpm --filter @crm/api build
 
-FROM node:20-alpine AS runner
-WORKDIR /app
-
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/apps/api/dist ./dist
-COPY --from=base /app/packages/db/prisma ./prisma
-
 ENV NODE_ENV=production
 EXPOSE 3000
-
-# Push schema to DB on startup, then run the app
-CMD ["sh", "-c", "node_modules/.bin/prisma db push --schema=./prisma/schema.prisma --skip-generate 2>&1 | tail -5 && node dist/main"]
+WORKDIR /app/apps/api
+CMD ["node", "dist/main"]
