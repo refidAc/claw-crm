@@ -5,7 +5,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Plus, GitBranch, ChevronRight, LayoutKanban } from 'lucide-react';
+import { Plus, GitBranch, ChevronRight, Kanban } from 'lucide-react';
 import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, Input, Label, Skeleton } from '@crm/ui';
 import type { Pipeline } from '@crm/types';
 import { getPipelines, createPipeline } from '@/lib/api';
@@ -59,7 +59,7 @@ function PipelineListContent() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2">
-            <LayoutKanban className="h-6 w-6 text-primary" />
+            <Kanban className="h-6 w-6 text-primary" />
             Pipelines
           </h1>
           <p className="text-muted-foreground text-sm mt-1">Manage your sales pipelines and track opportunities</p>

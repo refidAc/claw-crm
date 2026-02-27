@@ -4,6 +4,7 @@
  */
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
+import { Prisma } from '@crm/db';
 import { PrismaService } from '../prisma/prisma.service';
 import type {
   ContactCreatedPayload,
@@ -35,7 +36,7 @@ export class ActivityEventListener {
   ): Promise<void> {
     try {
       await this.prisma.activityEvent.create({
-        data: { accountId, entityType, entityId, eventType, payload },
+        data: { accountId, entityType, entityId, eventType, payload: payload as Prisma.InputJsonValue },
       });
     } catch (err) {
       this.logger.error(`Failed to log activity event [${eventType}]: ${String(err)}`);

@@ -43,7 +43,7 @@ export function ActionConfigPanel({ action, open, onClose, onSave, pipelines = [
 
   React.useEffect(() => {
     if (action) {
-      setConfig(action.config as Record<string, unknown>);
+      setConfig(action.config as unknown as Record<string, unknown>);
       setCondition(action.condition ?? '');
       setDelayAmount(action.delayAmount?.toString() ?? '');
       setDelayUnit(action.delayUnit ?? 'minutes');
@@ -57,7 +57,7 @@ export function ActionConfigPanel({ action, open, onClose, onSave, pipelines = [
   const handleSave = () => {
     onSave(
       action.id,
-      config as ActionConfig,
+      config as unknown as ActionConfig,
       condition || null,
       delayAmount ? parseInt(delayAmount, 10) : null,
       delayAmount ? delayUnit : null,

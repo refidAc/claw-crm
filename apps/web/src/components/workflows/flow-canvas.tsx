@@ -65,7 +65,7 @@ const ACTION_LABELS: Record<ActionType, string> = {
 };
 
 function getActionSummary(action: Action): string {
-  const cfg = action.config as Record<string, unknown>;
+  const cfg = action.config as unknown as Record<string, unknown>;
   switch (action.type) {
     case ActionType.SendEmail: return cfg.subject ? `Subject: ${String(cfg.subject)}` : 'Email';
     case ActionType.SendSms: return cfg.to ? `To: ${String(cfg.to)}` : 'SMS';

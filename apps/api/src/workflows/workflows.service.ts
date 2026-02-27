@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { Prisma } from '@crm/db';
 import { PrismaService } from '../prisma/prisma.service';
 
 import type { CreateWorkflowDto } from './dto/create-workflow.dto';
@@ -90,7 +91,7 @@ export class WorkflowsService {
       data: {
         workflowId,
         eventType: dto.eventType,
-        filters: dto.filters ?? {},
+        filters: (dto.filters ?? {}) as Prisma.InputJsonValue,
       },
     });
   }
@@ -162,7 +163,7 @@ export class WorkflowsService {
 
     return this.prisma.action.update({
       where: { id: actionId },
-      data: { ...(dto.type ? { type: dto.type } : {}), ...(dto.order !== undefined ? { order: dto.order } : {}), ...(dto.config ? { config: dto.config } : {}) },
+      data: { ...(dto.type ? { type: dto.type } : {}), ...(dto.order !== undefined ? { order: dto.order } : {}), ...(dto.config ? { config: dto.config as Prisma.InputJsonValue } : {}) },
     });
   }
 

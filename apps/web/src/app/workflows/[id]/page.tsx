@@ -162,7 +162,7 @@ function BuilderContent() {
   ) => {
     try {
       const updated = await updateAction(workflowId, actionId, {
-        config: config as Record<string, unknown>,
+        config: config as unknown as Record<string, unknown>,
         condition,
         delayAmount,
         delayUnit,
