@@ -17,4 +17,4 @@ COPY --from=base /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=base /app/apps/web/public ./apps/web/public
 
 EXPOSE 3001
-CMD ["node", "apps/web/server.js"]
+CMD ["node", "server.js"]
