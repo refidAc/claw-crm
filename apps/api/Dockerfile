@@ -14,7 +14,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /app/apps/api/dist ./dist
-COPY --from=base /app/packages/db/node_modules/.prisma ./node_modules/.prisma
+COPY --from=base /app/node_modules/.prisma ./node_modules/.prisma
 
 ENV NODE_ENV=production
 EXPOSE 3000
